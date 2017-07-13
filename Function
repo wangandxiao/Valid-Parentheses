@@ -1,35 +1,31 @@
 bool isValid(string s) {
-        if (s.length() % 2 != 0 || s[0] == ')' || s[0] == ']' || s[0] == '}')
-		return 0;
-	string newS;
-	for (int i = 0; i < s.length(); i++){
+	stack<char> newS;
+	for (int i = 0; i < s.length(); i++) {
 		char a = s[i];
 		switch (a) {
 		case '(':
 		case '[':
 		case '{':
-			newS = newS + a;
+			newS.push(a);
 			continue;
 		case ')':
-			if (newS[newS.length() - 1] != '(')
+			if (newS.top() != '(')
 				return 0;
 			break;
 		case ']':
-			if (newS[newS.length() - 1] != '[')
+			if (newS.top() != '[')
 				return 0;
 			break;
 		case '}':
-			if (newS[newS.length() - 1] != '{')
+			if (newS.top() != '{')
 				return 0;
 			break;
-			
+
 
 		}
-		newS = newS.substr(0, newS.length() - 1);
+		newS.pop();
 
 	}
-	if (newS.length() > 0)
-		return 0;
-	else 
-		return 1;
-    }
+	return (newS.empty());
+		
+}
